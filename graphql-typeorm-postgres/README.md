@@ -1,6 +1,6 @@
 # Description
 
-basic REST API example with PostgreSQL
+basic GraphQL example with PostgreSQL
 
 # install packages
 
