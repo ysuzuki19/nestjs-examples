@@ -51,7 +51,7 @@ export class AuthService {
   async signIn(signInDto: SignInDto) {
     const { username, password } = signInDto;
     const account = await this.accountRepository.findOne({
-      username,
+      where: { username },
     });
 
     if (account && (await bcrypt.compare(password, account.password))) {
@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   async validateUser(username: string, password: string): Promise<Account> {
-    const user = await this.accountRepository.findOne({ username });
+    const user = await this.accountRepository.findOne({ where: { username } });
     if (user && user.password === password) {
       return this.prunePassword(user);
     }

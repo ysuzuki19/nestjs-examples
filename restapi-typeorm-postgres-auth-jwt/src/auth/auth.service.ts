@@ -52,7 +52,7 @@ export class AuthService {
   async signin(accountDto: AccountDto): Promise<AuthCred> {
     const { username, password } = accountDto;
     const account = await this.accountRepository.findOne({
-      username,
+      where: { username },
     });
 
     if (account && (await bcrypt.compare(password, account.password))) {
@@ -69,7 +69,7 @@ export class AuthService {
     username: string,
     password: string,
   ): Promise<AccountEntity> {
-    const user = await this.accountRepository.findOne({ username });
+    const user = await this.accountRepository.findOne({ where: { username } });
     if (user && user.password === password) {
       return this.prunePassword(user);
     }

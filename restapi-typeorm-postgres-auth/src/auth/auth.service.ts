@@ -49,7 +49,7 @@ export class AuthService {
   async signin(accountDto: AccountDto): Promise<AccountEntity> {
     const { username, password } = accountDto;
     const account = await this.accountRepository.findOne({
-      username,
+      where: { username },
     });
 
     if (account && (await bcrypt.compare(password, account.password))) {
