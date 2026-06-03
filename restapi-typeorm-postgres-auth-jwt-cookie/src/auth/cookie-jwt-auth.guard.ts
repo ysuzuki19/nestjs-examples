@@ -33,7 +33,7 @@ export class CookieJwtAuthGuard implements CanActivate {
       };
       req['account'] = account;
       return true;
-    } catch (e) {
+    } catch {
       this.logger.log('Invalid Access');
       throw new UnauthorizedException();
     }
